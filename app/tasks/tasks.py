@@ -10,10 +10,7 @@ def send_password_email(user_email: str,
                                                   random_password)
 
     with smtplib.SMTP(settings.SMTP_HOST, int(settings.SMTP_PORT)) as server:
-        server.ehlo()
+        server.set_debuglevel(1) 
         server.starttls()
-        server.ehlo() 
         server.login(settings.SMTP_USER, settings.SMTP_PASS)
-        server.send_message(msg_content)  
-
-#celery -A app.tasks.celery_app:celery worker --loglevel=INFO
+        server.send_message(msg_content)
